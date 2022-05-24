@@ -17,6 +17,10 @@ class ChecksTest {
         assertThatThrownBy(() -> Checks.notNull(null, "message"))
             .isInstanceOf(NullPointerException.class)
             .hasMessageContaining("message");
+
+        assertThatThrownBy(() -> Checks.notNull(null, () -> "message"))
+            .isInstanceOf(NullPointerException.class)
+            .hasMessageContaining("message");
     }
 
 }
