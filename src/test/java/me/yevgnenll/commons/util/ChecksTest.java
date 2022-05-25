@@ -23,4 +23,21 @@ class ChecksTest {
             .hasMessageContaining("message");
     }
 
+    @Test
+    @DisplayName(value = "is true expression")
+    void isTrueTest() {
+        String value = "value";
+
+        assertThatCode(() -> Checks.isTrue(!value.isEmpty(), "value must not be null"))
+            .doesNotThrowAnyException();
+
+        assertThatThrownBy(() -> Checks.isTrue(false, "test"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("test");
+
+        assertThatThrownBy(() -> Checks.isTrue(false, () -> "test"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("test");
+    }
+
 }
