@@ -26,4 +26,16 @@ public final class Checks {
         return messageSupplier != null ? messageSupplier.get() : null;
     }
 
+    public static void isTrue(boolean expression, String message) {
+        if (!expression) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    public static void isTrue(boolean expression, Supplier<String> message) {
+        if (!expression) {
+            throw new IllegalArgumentException(safeGet(message));
+        }
+    }
+
 }
